@@ -12,7 +12,7 @@ if(isset($_POST['name'])){
     die("connection to db failed".
     mysqli_connect_error());
  }
- echo"success connecting to the database";
+ 
  $name=$_POST['name'];
  $age=$_POST['age'];
  $gender=$_POST['gender'];
@@ -21,15 +21,15 @@ if(isset($_POST['name'])){
  $other=$_POST['other'];
 
 
- $sql=" INSERT INTO  `sex`.`candidates` ( `name`, `age`, `gender`, `email`, `phone`, `other`, `date`) VALUES ('$name',
+ $sql=" INSERT INTO  `sex_`.`candidates` ( `name`, `age`, `gender`, `email`, `phone`, `other`, `date`) VALUES ('$name',
  '$age', '$gender', '$email', '$phone', '$other', current_timestamp());";
- echo $sql;
+ 
 
  if($con->query($sql) == true){
-   echo" successfully inserted";
+   echo"";
  }
  else{
-    echo"ERROR: $sql <br> $con->error";
+    echo"";
  }
  $con->close();
 }
@@ -54,7 +54,19 @@ if(isset($_POST['name'])){
     <div class="container">
         <h1>Get your prostitute</h1>
         <p>You have to fill up this form</p>
-        <p class="msg" style="font-size: 30px;"> <i>You form is success fully submitted</i> </p>
+<?php
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $name=$_POST['name'];
+        $age=$_POST['age'];
+        $gender=$_POST['gender'];
+        $email=$_POST['email'];
+        $phone=$_POST['phone'];
+        $other=$_POST['other'];
+    echo"<p class='msg' style='font-size: 30px;'> <i>You form is success fully submitted</i> </p>";
+    }
+        
+?>
+        
 
         <form action="index.php" method="post">
             <input type="text" name="name" id="name" placeholder="Enter your name">
